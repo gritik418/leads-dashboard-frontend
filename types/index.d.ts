@@ -54,3 +54,21 @@ interface UserProfileResponse {
   message: string;
   user: User;
 }
+
+interface DashboardStatsResponse {
+  success: boolean;
+  message: string;
+  data?: Partial<{
+    totalLeads: string;
+    newLeads: string;
+    qualifiedLeads: string;
+    convertedLeads: string;
+  }>;
+}
+
+interface DashboardStatsData {
+  totalLeads?: string;
+  newLeads?: string;
+  qualifiedLeads?: string;
+  convertedLeads?: string;
+}
