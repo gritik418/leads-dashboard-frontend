@@ -3,6 +3,7 @@ import dashboardApi from "@/services/dashboardApi";
 import leadsApi from "@/services/leadsApi";
 import userApi from "@/services/userApi";
 import { configureStore } from "@reduxjs/toolkit";
+import userSlice from "./userSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [dashboardApi.reducerPath]: dashboardApi.reducer,
     [leadsApi.reducerPath]: leadsApi.reducer,
+    [userSlice.reducerPath]: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

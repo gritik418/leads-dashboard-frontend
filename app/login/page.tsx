@@ -166,7 +166,7 @@ const Login = () => {
         </div>
 
         <div className="px-8 pb-8 text-center text-sm text-gray-600">
-          <p>
+          {/* <p>
             Don't have an account?{" "}
             <a
               href="#"
@@ -174,7 +174,7 @@ const Login = () => {
             >
               Sign up
             </a>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

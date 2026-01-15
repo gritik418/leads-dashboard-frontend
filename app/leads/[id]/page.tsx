@@ -55,7 +55,7 @@ export default function LeadDetailPage() {
           <div className="space-y-3">
             <Link
               href={"/leads"}
-              className="w-full text-indigo-600 hover:text-indigo-700 font-semibold py-3 px-6 border-2 border-indigo-200/50 hover:border-indigo-300 rounded-2xl backdrop-blur-sm transition-all duration-200 hover:bg-indigo-50/50"
+              className="w-full cursor-pointer text-indigo-600 hover:text-indigo-700 font-semibold py-3 px-6 border-2 border-indigo-200/50 hover:border-indigo-300 rounded-2xl backdrop-blur-sm transition-all duration-200 hover:bg-indigo-50/50"
             >
               Back to Leads
             </Link>
