@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Leads Dashboard
+A modern lead management dashboard built with **Next.js 14 (App Router)**, **TypeScript**, and **Tailwind CSS**. Features glassmorphism UI, responsive design, and smooth animations.
 
-## Getting Started
+## 🚀 Features
 
-First, run the development server:
+- **Dashboard** - Lead analytics and metrics
+- **Leads Management** - Dynamic lead details with `/leads/[id]` routing
+- **Modern UI** - Glassmorphism, gradients, backdrop blur effects
+- **Responsive** - Mobile-first design with hamburger menu
+- **User Authentication** - Profile menu with logout
+- **TypeScript** - Full type safety
+- **Performance** - Optimized with Next.js App Router
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 🚀 Frontend Setup Script
+
+### This script clones the repo, installs dependencies, and provides commands for development and production.
+
+## 1️⃣ Clone the repository
+```
+git clone https://github.com/gritik418/leads-dashboard-frontend.git
+```
+```
+cd leads-dashboard-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install dependencies
+```
+npm install
+```
+## 3️⃣ Start development server (hot reload)
+```
+npm run dev
+```
+## 4️⃣ Build for production
+```
+npm run build
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# 📌 Tech Stack & Tools
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Frontend Framework: Next.js (App Router & Client Components)
 
-## Learn More
+- Language: TypeScript
 
-To learn more about Next.js, take a look at the following resources:
+- State Management: Redux Toolkit
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Styling: Tailwind CSS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Icons: Lucide-React
 
-## Deploy on Vercel
+- Data Fetching: RTK Query
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Dashboard Analytics: View total leads, new leads, qualified leads, and converted leads.
+
+- Leads Management: Browse recent leads, filter by source, status, or stage.
+
+- Leads by Stage Visualization: Interactive charts showing the distribution of leads across stages.
+
+- Lead Detail Page: View detailed information for each lead.
+
+- Responsive Navbar: Desktop and mobile-friendly navigation with user menu and logout.
+
+- Smooth UI/UX: Modern, minimalistic design with Tailwind CSS and animations.
+
+- State Management: Uses Redux Toolkit for global state.
+
+- API Integration: Fetch data from backend APIs with RTK Query.
