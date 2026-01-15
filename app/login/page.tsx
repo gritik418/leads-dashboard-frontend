@@ -1,11 +1,54 @@
 "use client";
+import { useLoginMutation } from "@/services/authApi";
+import userApi from "@/services/userApi";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [login] = useLoginMutation();
+  const [loginData, setLoginData] = useState<LoginData>({
+    email: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Partial<LoginData>>({});
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setLoginData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setErrors({});
+      setLoading(true);
+      const result = await login(loginData).unwrap();
+
+      if (result.message) {
+        toast.success(result.message);
+
+        dispatch(userApi.util.invalidateTags(["User"]));
+        router.push("/");
+      }
+    } catch (error: any) {
+      if (error?.data?.errors) {
+        setErrors(error.data.errors);
+      } else if (error?.data?.message) {
+        toast.error(error.data.message);
+      } else {
+        toast.error("Network error. Please check your connection.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 p-4">
@@ -40,14 +83,18 @@ const Login = () => {
 
             <input
               type="email"
+              name="email"
               required
               className="w-full text-black py-3 px-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-gray-50/50 backdrop-blur-sm"
               placeholder="Enter your email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              value={loginData.email}
+              onChange={handleChange}
             />
+            {errors?.email && typeof errors.email === "string" ? (
+              <span className="mt-0.5 ml-0.5 text-xs font-medium text-red-600 flex items-center gap-1">
+                {errors.email}
+              </span>
+            ) : null}
           </div>
 
           <div>
@@ -60,10 +107,9 @@ const Login = () => {
                 required
                 className="w-full text-black px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-gray-50/50 backdrop-blur-sm"
                 placeholder="Enter your password"
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
+                name="password"
+                value={loginData.password}
+                onChange={handleChange}
               />
               <button
                 type="button"
@@ -77,9 +123,16 @@ const Login = () => {
                 )}
               </button>
             </div>
+
+            {errors?.password && typeof errors.password === "string" ? (
+              <span className="mt-0.5 ml-0.5 text-xs font-medium text-red-600 flex items-center gap-1">
+                {errors.password}
+              </span>
+            ) : null}
           </div>
 
           <button
+            onClick={handleSubmit}
             disabled={loading}
             className="w-full cursor-pointer bg-linear-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold text-lg shadow-lg hover:from-indigo-700 hover:to-purple-700 focus:ring-4 focus:ring-indigo-500/50 transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           >
