@@ -106,3 +106,9 @@ interface LeadsResponse {
   totalPages: number;
   currentPage: number;
 }
+
+interface LeadResponse {
+  success: boolean;
+  message: string;
+  lead: Lead;
+}

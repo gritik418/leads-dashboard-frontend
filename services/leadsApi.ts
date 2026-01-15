@@ -43,9 +43,18 @@ const leadsApi = createApi({
         };
       },
     }),
+    getLeadById: builder.query<LeadResponse, string>({
+      query: (id: string) => ({
+        url: `/${id}`,
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetLeadsQuery } = leadsApi;
+export const { useGetLeadsQuery, useGetLeadByIdQuery } = leadsApi;
 
 export default leadsApi;
