@@ -4,6 +4,7 @@ import "./globals.css";
 import ReduxProvider from "@/providers/ReduxProvider";
 import ProtectedWrapper from "@/components/ProtectedWrapper/ProtectedWrapper";
 import Navbar from "@/components/Navbar/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
             <Navbar />
             {children}
           </ProtectedWrapper>
+          <Toaster />
         </ReduxProvider>
       </body>
     </html>
