@@ -1,5 +1,6 @@
 import authApi from "@/services/authApi";
 import dashboardApi from "@/services/dashboardApi";
+import leadsApi from "@/services/leadsApi";
 import userApi from "@/services/userApi";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -8,12 +9,14 @@ const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [dashboardApi.reducerPath]: dashboardApi.reducer,
+    [leadsApi.reducerPath]: leadsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(authApi.middleware)
       .concat(userApi.middleware)
-      .concat(dashboardApi.middleware),
+      .concat(dashboardApi.middleware)
+      .concat(leadsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

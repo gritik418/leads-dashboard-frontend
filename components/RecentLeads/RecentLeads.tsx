@@ -9,6 +9,8 @@ import {
   XCircle,
   Clock as ClockIcon,
 } from "lucide-react";
+import { useGetLeadsQuery } from "@/services/leadsApi";
+import { useEffect, useState } from "react";
 
 const statusConfig = {
   New: { color: "bg-blue-100 text-blue-800 border-blue-200", icon: ClockIcon },
@@ -26,55 +28,20 @@ const statusConfig = {
     icon: CircleCheck,
   },
 };
-export const dummyLeads = [
-  {
-    _id: "1",
-    name: "Rahul Sharma",
-    email: "rahul@gmail.com",
-    source: "Website",
-    status: "New",
-    stage: "Prospect",
-    createdAt: "2025-01-10",
-  },
-  {
-    _id: "2",
-    name: "Ananya Verma",
-    email: "ananya@gmail.com",
-    source: "Referral",
-    status: "Contacted",
-    stage: "Opportunity",
-    createdAt: "2025-01-11",
-  },
-  {
-    _id: "3",
-    name: "Amit Patel",
-    email: "amit@gmail.com",
-    source: "Email",
-    status: "Qualified",
-    stage: "Negotiation",
-    createdAt: "2025-01-12",
-  },
-  {
-    _id: "4",
-    name: "Sneha Kapoor",
-    email: "sneha@gmail.com",
-    source: "Social Media",
-    status: "Lost",
-    stage: "Closed",
-    createdAt: "2025-01-13",
-  },
-  {
-    _id: "5",
-    name: "Vikas Singh",
-    email: "vikas@gmail.com",
-    source: "Website",
-    status: "New",
-    stage: "Prospect",
-    createdAt: "2025-01-14",
-  },
-];
+
 const RecentLeads = () => {
-  const isLoading = false;
+  const { data, isLoading } = useGetLeadsQuery({
+    limit: 5,
+    sortby: "createdAt",
+    order: "desc",
+  });
+  const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
+
+  useEffect(() => {
+    if (data?.leads) {
+      setRecentLeads(data.leads);
+    }
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -86,8 +53,6 @@ const RecentLeads = () => {
       </div>
     );
   }
-
-  const recentLeads = dummyLeads || [];
 
   return (
     <div className="bg-white/70 backdrop-blur-xl rounded-3xl shadow-xl overflow-hidden">
@@ -116,7 +81,7 @@ const RecentLeads = () => {
         </div>
       </div>
 
-      <div className="divide-y divide-slate-100/50 max-h-96 overflow-y-auto">
+      <div className="divide-y divide-slate-100/50 max-h-112 overflow-y-auto">
         {recentLeads.length === 0 ? (
           <div className="p-12 text-center">
             <User className="w-16 h-16 text-slate-400 mx-auto mb-4" />
@@ -140,7 +105,7 @@ const RecentLeads = () => {
               <Link
                 key={lead._id}
                 href={`/leads/${lead._id}`}
-                className="p-6 hover:bg-slate-50/50 group transition-all duration-200 flex items-center justify-between"
+                className="p-6 hover:bg-slate-100 group transition-all duration-200 flex items-center justify-between"
               >
                 <div className="flex items-center space-x-4 flex-1 min-w-0">
                   <div className="w-12 h-12 bg-linear-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shrink-0">

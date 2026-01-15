@@ -72,3 +72,12 @@ interface DashboardStatsData {
   qualifiedLeads?: string;
   convertedLeads?: string;
 }
+
+interface LeadsResponse {
+  success: boolean;
+  message: string;
+  leads: Lead[];
+  totalLeads: number;
+  totalPages: number;
+  currentPage: number;
+}
