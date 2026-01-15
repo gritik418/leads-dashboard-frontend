@@ -8,6 +8,26 @@ interface User {
   updatedAt: string;
 }
 
+enum Source {
+  "Website",
+  "Referral",
+  "Ads",
+  "Social",
+}
+
+enum Status {
+  "New",
+  "Contacted",
+  "Converted",
+  "Lost",
+}
+
+enum Stage {
+  "Lead",
+  "Qualified",
+  "Proposal",
+}
+
 interface Lead {
   _id: string;
   name: string;
@@ -17,7 +37,6 @@ interface Lead {
   status: "New" | "Contacted" | "Converted" | "Lost";
   stage: "Lead" | "Qualified" | "Proposal";
   createdAt: string;
-  updatedAt: string;
 }
 
 interface LoginData {

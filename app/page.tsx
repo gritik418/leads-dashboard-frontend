@@ -20,13 +20,13 @@ export default function HomePage() {
       title: "New Today",
       value: analytics?.newLeads || "0",
       icon: UserPlus,
-      color: "emerald",
+      color: "indigo",
     },
     {
       title: "Qualified Leads",
       value: analytics?.qualifiedLeads || "0",
       icon: BadgeCheck,
-      color: "emerald",
+      color: "indigo",
     },
     {
       title: "Converted Leads",

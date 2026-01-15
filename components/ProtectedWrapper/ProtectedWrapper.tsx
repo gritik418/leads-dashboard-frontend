@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 const publicRoutes = ["/login", "/register"];
 
 const ProtectedWrapper = ({ children }: { children: React.ReactNode }) => {
-  const { data, isLoading, isFetching, isError } = useGetUserQuery();
+  const { data, isLoading, isFetching } = useGetUserQuery();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -15,7 +15,7 @@ const ProtectedWrapper = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = !!data?.user?._id;
 
   useEffect(() => {
-    if (isLoading || isFetching || isError) return;
+    if (isLoading || isFetching) return;
 
     if (!isPublicRoute && !isAuthenticated) {
       router.replace("/login");
@@ -26,11 +26,6 @@ const ProtectedWrapper = ({ children }: { children: React.ReactNode }) => {
       router.replace("/");
     }
   }, [isLoading, isFetching, isPublicRoute, isAuthenticated, router]);
-
-  if (isError && !isPublicRoute) {
-    router.replace("/login");
-    return;
-  }
 
   if (!isPublicRoute && (isLoading || isFetching)) {
     return (
