@@ -67,3 +67,7 @@ npm run build
 - State Management: Uses Redux Toolkit for global state.
 
 - API Integration: Fetch data from backend APIs with RTK Query.
+
+# 🔗 Live Demo
+
+[https://leads-dashboard-frontend.vercel.app/](https://leads-dashboard-frontend.vercel.app/)
