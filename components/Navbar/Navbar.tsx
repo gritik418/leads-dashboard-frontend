@@ -1,5 +1,7 @@
 "use client";
 
+import { useLogoutMutation } from "@/services/authApi";
+import userApi from "@/services/userApi";
 import { selectUser } from "@/store/userSlice";
 import {
   ChevronDown,
@@ -11,9 +13,10 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -23,6 +26,9 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const user = useSelector(selectUser);
+  const [logout] = useLogoutMutation();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -31,7 +37,23 @@ export default function Navbar() {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const publicRoutes = ["/login", "/register"];
-  const handleLogout = () => {
+
+  const handleLogout = async () => {
+    try {
+      const result = await logout().unwrap();
+
+      toast.success(result.message);
+
+      dispatch(userApi.util.invalidateTags(["User"]));
+      router.push("/");
+    } catch (error: any) {
+      if (error?.data?.message) {
+        toast.error(error.data.message);
+      } else {
+        toast.error("Network error. Please check your connection.");
+      }
+    }
+
     localStorage.removeItem("token");
     window.location.href = "/login";
   };
