@@ -1,3 +1,25 @@
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user";
+  password?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Lead {
+  _id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  source: "Website" | "Referral" | "Ads" | "Social";
+  status: "New" | "Contacted" | "Converted" | "Lost";
+  stage: "Lead" | "Qualified" | "Proposal";
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface LoginData {
   email: string;
   password: string;
@@ -25,4 +47,10 @@ interface RegisterData {
   email: string;
   password: string;
   passwordConfirmation: string;
+}
+
+interface UserProfileResponse {
+  success: boolean;
+  message: string;
+  user: User;
 }

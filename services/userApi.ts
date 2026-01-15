@@ -10,7 +10,7 @@ const userApi = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    getUser: builder.query<BaseResponse, void>({
+    getUser: builder.query<UserProfileResponse, void>({
       query: () => ({
         url: "/me",
         method: "GET",
