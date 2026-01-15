@@ -82,7 +82,13 @@ interface DashboardStatsResponse {
     newLeads: string;
     qualifiedLeads: string;
     convertedLeads: string;
+    leadsByStage: LeadsByStageItem[];
   }>;
+}
+
+interface LeadsByStageItem {
+  _id: Stage;
+  count: number;
 }
 
 interface DashboardStatsData {
